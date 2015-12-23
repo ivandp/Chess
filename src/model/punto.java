@@ -1,8 +1,9 @@
 package model;
-public class punto {
+
+public class Punto {
 	private int x;
 	private int y;
-	public punto(int x, int y){
+	public Punto(int x, int y){
 		this.x=x;
 		this.y=y;
 	}
@@ -14,7 +15,7 @@ public class punto {
 	public int getY(){
 		return y;
 	}
-	public punto get(){
+	public Punto get(){
 		return this;
 	}
 

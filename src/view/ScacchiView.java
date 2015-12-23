@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import controller.ScacchiController;
 import rules.*;
 import model.ScacchiModel;
-import model.punto;
+import model.Punto;
 
 
 public class ScacchiView extends JFrame {
@@ -29,7 +29,7 @@ public class ScacchiView extends JFrame {
 	int coloreSfondo=0;
 	JButton[][] b = new JButton[8][8];
 	Icon imgPedina;
-	private ArrayList<punto> p;
+	private ArrayList<Punto> p;
 	JFrame frame;
 	
 	
@@ -93,20 +93,20 @@ public class ScacchiView extends JFrame {
 	}
 
 	//colora di rosso la previsione delle mosse possibili
-	public void colorizeRed(ArrayList<punto> p){
+	public void colorizeRed(ArrayList<Punto> p){
 		
 		for(int i=0;i<p.size();i++){
 			
-			punto p1 = p.get(i);
+			Punto p1 = p.get(i);
 		
 			b[p1.getX()][p1.getY()].setBackground(Color.RED);
 			
 		}
 	}
 	
-	public void colorizeG(ArrayList<punto> p){
+	public void colorizeG(ArrayList<Punto> p){
 		for(int i=0;i<p.size();i++){
-			punto p1 = p.get(i);
+			Punto p1 = p.get(i);
 		
 			b[p1.getX()][p1.getY()].setBackground(Color.GREEN);
 		}

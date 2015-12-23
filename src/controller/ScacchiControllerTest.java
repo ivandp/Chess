@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import model.ScacchiModel;
-import model.punto;
+import model.Punto;
 import rules.Alfiere;
 import rules.Cavallo;
 import rules.Donna;

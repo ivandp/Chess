@@ -11,7 +11,7 @@ import rules.Pedone;
 import rules.Re;
 import rules.Torre;
 import model.ScacchiModel;
-import model.punto;
+import model.Punto;
 import view.CambioPedone;
 import view.ScacchiView;
 import view.ScaccoDialog;
@@ -24,7 +24,7 @@ public class ScacchiController {
 	private ScacchiModel m = null;
 	private ScacchiView v = null;
 	 int x1=0,y1=0,x2=0,y2=0,t=0,giocatore=0,motto=0;
-	 private ArrayList<punto> p;
+	 private ArrayList<Punto> p;
 
 	//alla creazione del controller vanno passati model e view
 	public ScacchiController(ScacchiModel m, ScacchiView v){
@@ -43,7 +43,7 @@ public class ScacchiController {
 				Pedina pedina = m.get(x, y);
 				t++;
 				if( scacco(giocatore) ){
-					ArrayList<punto> prev;
+					ArrayList<Punto> prev;
 					if(pedina instanceof Re){
 						prev = intersezioneInv(pedina.preemption(), arrayListPreeTutti(giocatore==0 ? 1 : 0));
 					}else{
@@ -69,7 +69,7 @@ public class ScacchiController {
 
 				
 			
-			ArrayList<punto> pree;
+			ArrayList<Punto> pree;
 			if( scacco(giocatore) ){
 				
 				Pedina pedina = m.get(x1, y1);
@@ -81,7 +81,7 @@ public class ScacchiController {
 
 				}
 				
-				if( controlloPuntoArray(pree,new punto(x,y)) ){
+				if( controlloPuntoArray(pree,new Punto(x,y)) ){
 					
 					m.mangia(x1,y1,x,y);
 					t=0;
@@ -110,7 +110,7 @@ public class ScacchiController {
 					
 
 				}
-				if( controlloPuntoArray(pree,new punto(x,y)) ){
+				if( controlloPuntoArray(pree,new Punto(x,y)) ){
 					m.mangia(x1,y1,x,y);
 					t=0;
 					
@@ -149,7 +149,7 @@ public class ScacchiController {
 	}
 	
 	//scambia il pedone con il pezzo scelto quando si arriva all'estremità opposta della scacchiera
-	public void scambioPedoneEstremi(int x, punto p, int giocatore){
+	public void scambioPedoneEstremi(int x, Punto p, int giocatore){
 		
 		Pedina o = null;
 		switch (x){
@@ -166,10 +166,10 @@ public class ScacchiController {
 	private void controlloPedoni(){
 		for(int i=0; i<8;i++){
 			if(m.get(0, i) instanceof Pedone ) {
-				new CambioPedone(v, this, new punto (0,i), 1 ).setVisible(true);
+				new CambioPedone(v, this, new Punto (0,i), 1 ).setVisible(true);
 			}
 			if( m.get(7, i) instanceof Pedone ){
-				new CambioPedone(v, this, new punto (7,i), 0 ).setVisible(true);
+				new CambioPedone(v, this, new Punto (7,i), 0 ).setVisible(true);
 			}
 				
 		}
@@ -178,9 +178,9 @@ public class ScacchiController {
 
 	public Boolean scaccoMatto(int g){
 		if( scacco(g) ){
-		ArrayList <punto> p = new ArrayList();
+		ArrayList <Punto> p = new ArrayList();
 		Boolean test1= true, test2=true;
-		punto rePunto = getRe(g);
+		Punto rePunto = getRe(g);
 		Pedina re = returnRe(g);
 		p=re.preemption();
 		for(int i=0;i<p.size();i++){
@@ -220,13 +220,13 @@ public class ScacchiController {
 		 *non tutte le direzioni della preemption del pezzo che mette sotto scacco)
 		 */
 		
-		private  ArrayList<punto> arrayListScaccoRe(int s){
+		private  ArrayList<Punto> arrayListScaccoRe(int s){
 			
-			ArrayList<punto> p = new ArrayList<punto>();
+			ArrayList<Punto> p = new ArrayList<Punto>();
 			//r=posizione del re avversario
-			punto r =  getRe( (s==0)?1:0 );
+			Punto r =  getRe( (s==0)?1:0 );
 			//preemption del re avversario
-			ArrayList<punto> rePree;
+			ArrayList<Punto> rePree;
 			if(returnRe( (s==0)?1:0 )!=null)
 				rePree = returnRe( (s==0)?1:0 ).preemption();
 			 
@@ -241,7 +241,7 @@ public class ScacchiController {
 							if( !(ped instanceof Re) &&ped.hasRePreemption( r )){
 								//se il re è presente aggiungo l'array ritornatomi da preemptionre()
 								p.addAll( ped.preemptionRe(r) );
-								p.add( new punto(y,i) );
+								p.add( new Punto(y,i) );
 							}
 							
 							
@@ -260,11 +260,11 @@ public class ScacchiController {
 		}
 		
 		
-		private  ArrayList<punto> arrayListPreeTutti(int s){
+		private  ArrayList<Punto> arrayListPreeTutti(int s){
 			
-			ArrayList<punto> p = new ArrayList<punto>();
+			ArrayList<Punto> p = new ArrayList<Punto>();
 			//r=posizione del re avversario
-			punto r =  getRe( s );
+			Punto r =  getRe( s );
 			//preemption del re avversario
 			
 			
@@ -278,11 +278,11 @@ public class ScacchiController {
 						
 						if(corr instanceof Pedone){
 							p.addAll( corr.preemptionRe(null) );
-							p.add( new punto(i,y) );
+							p.add( new Punto(i,y) );
 							
 						}else{
 							p.addAll( corr.preemption() );
-							p.add( new punto(i,y) );
+							p.add( new Punto(i,y) );
 								
 							}
 						}
@@ -297,11 +297,11 @@ public class ScacchiController {
 		}
 		
 		
-		private  ArrayList<punto> arrayListPreeTuttiNoRe(int s){
+		private  ArrayList<Punto> arrayListPreeTuttiNoRe(int s){
 			
-			ArrayList<punto> p = new ArrayList<punto>();
+			ArrayList<Punto> p = new ArrayList<Punto>();
 			//r=posizione del re avversario
-			punto r =  getRe( s );
+			Punto r =  getRe( s );
 			//preemption del re avversario
 			
 			
@@ -315,11 +315,11 @@ public class ScacchiController {
 						
 						if(corr instanceof Pedone){
 							p.addAll( corr.preemption( ) );
-							p.add( new punto(i,y) );
+							p.add( new Punto(i,y) );
 							
 						}else{
 							p.addAll( corr.preemption() );
-							p.add( new punto(i,y) );
+							p.add( new Punto(i,y) );
 								
 							}
 						}
@@ -334,14 +334,14 @@ public class ScacchiController {
 		}
 		
 		
-		private  ArrayList<punto> intersezione( ArrayList<punto> p2, ArrayList<punto> o ) {
+		private  ArrayList<Punto> intersezione( ArrayList<Punto> p2, ArrayList<Punto> o ) {
 			
-			ArrayList<punto> p = new ArrayList<punto>(0);
+			ArrayList<Punto> p = new ArrayList<Punto>(0);
 			for( int i=0; i<p2.size(); i++ )
 				for( int h=0; h<o.size(); h++ )
 					if( p2.get(i).getX() == o.get(h).getX() && p2.get(i).getY() == o.get(h).getY() )
 						
-						p.add(new punto( p2.get(i).getX(),  p2.get(i).getY()) );
+						p.add(new Punto( p2.get(i).getX(),  p2.get(i).getY()) );
 			
 			return p;
 		}
@@ -385,9 +385,9 @@ public class ScacchiController {
 		//tutti i punti di p2 che non appaiono mai in o
 		//scorre tutto p2 se c'è un elemento contenuto anche in o, lo rimuovere dal risultato p, se nella preemption p2
 		//è presente un pezzo avversario non difeso, questo pezzo verrà aggiunto alla preemption.
-		private  ArrayList<punto> intersezioneInv(ArrayList<punto> p2, ArrayList<punto> o) {
+		private  ArrayList<Punto> intersezioneInv(ArrayList<Punto> p2, ArrayList<Punto> o) {
 			
-			ArrayList<punto> p = new ArrayList<punto>(0);
+			ArrayList<Punto> p = new ArrayList<Punto>(0);
 			Boolean test= false;
 			for( int i=0; i<p2.size(); i++ ){
 				test=false;
@@ -396,15 +396,15 @@ public class ScacchiController {
 						test=true;
 					Pedina ped =  m.get( p2.get(i).getX(), p2.get(i).getY() );
 					if( (h==o.size()-1 && test==false) || (ped!= null && ped.getGiocatore()!=giocatore) )
-						p.add( new punto( p2.get(i).getX(),  p2.get(i).getY()) );
+						p.add( new Punto( p2.get(i).getX(),  p2.get(i).getY()) );
 				}
 			}
 			return p;
 		}
 		
-		private  Boolean controlloPuntoArray( ArrayList<punto> p2, punto g ) {
+		private  Boolean controlloPuntoArray( ArrayList<Punto> p2, Punto g ) {
 			
-			ArrayList<punto> p = new ArrayList<punto>(0);
+			ArrayList<Punto> p = new ArrayList<Punto>(0);
 			for( int i=0; i<p2.size(); i++ )
 				
 					if( p2.get(i).getX() == g.getX() && p2.get(i).getY() == g.getY() )
@@ -427,13 +427,13 @@ public class ScacchiController {
 		    
 		}
 		
-		private  punto getRe(int g) {
+		private  Punto getRe(int g) {
 			
 			for(int i=0;i<8;i++){
 				for(int y=0; y<8; y++){
 					
 					if(m.get(y,i)!=null && ( m.get(y,i).isRe(g)) )
-						return new punto(y,i);
+						return new Punto(y,i);
 						
 				}
 			}

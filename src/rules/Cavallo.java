@@ -1,7 +1,7 @@
 package rules;
 import java.util.ArrayList;
 import model.ScacchiModel;
-import model.punto;
+import model.Punto;
 
 
 
@@ -30,28 +30,28 @@ public class Cavallo implements Pedina{
 		this.m=m;
 	}
 
-	public ArrayList<punto> preemption(){
-		punto[] arrayp = {new punto(x+1,y-2), new punto(x+1,y+2), 
-				     new punto(x+2,y-1), new punto(x+2,y+1), 
-				     new punto(x+2,y-1), new punto(x-1,y-2), 
-				     new punto(x-1,y+2), new punto(x-2,y-1),
-				     new punto(x-2,y+1), new punto(x-2,y-1)
+	public ArrayList<Punto> preemption(){
+		Punto[] arrayp = {new Punto(x+1,y-2), new Punto(x+1,y+2), 
+				     new Punto(x+2,y-1), new Punto(x+2,y+1), 
+				     new Punto(x+2,y-1), new Punto(x-1,y-2), 
+				     new Punto(x-1,y+2), new Punto(x-2,y-1),
+				     new Punto(x-2,y+1), new Punto(x-2,y-1)
 		};
 		
-		ArrayList<punto> arr = new ArrayList<punto>(0);
+		ArrayList<Punto> arr = new ArrayList<Punto>(0);
 		
 		for(int i=0; i<arrayp.length; i++){
 			if(isValid(arrayp[i].getX(), arrayp[i].getY() ) )
 					arr.add(arrayp[i]);
 		}
 		
-		ArrayList<punto> p = new ArrayList<punto>(0);
+		ArrayList<Punto> p = new ArrayList<Punto>(0);
 		
 		for(int i=0; i < arr.size(); i++){
 			if(m.get(arr.get(i).getX(),arr.get(i).getY())==null)
-				p.add(new punto(arr.get(i).getX(),arr.get(i).getY()));
+				p.add(new Punto(arr.get(i).getX(),arr.get(i).getY()));
 			if(m.get(arr.get(i).getX(),arr.get(i).getY())!=null && m.get(arr.get(i).getX(),arr.get(i).getY()).getGiocatore()!=g){
-				p.add(new punto(arr.get(i).getX(),arr.get(i).getY()));
+				p.add(new Punto(arr.get(i).getX(),arr.get(i).getY()));
 				
 			}
 			
@@ -77,8 +77,8 @@ public class Cavallo implements Pedina{
 	public boolean isRe(int g) {
 		return false;
 	}
-	public Boolean hasRePreemption(punto g) {
-		ArrayList<punto> p= preemption();
+	public Boolean hasRePreemption(Punto g) {
+		ArrayList<Punto> p= preemption();
 		if( g!=null ){
 		for(int i=0;i<p.size();i++)
 			if(p.get(i).getX()==g.getX() && p.get(i).getY()==g.getY())
@@ -87,9 +87,9 @@ public class Cavallo implements Pedina{
 		return false;
 	}
 	@Override
-	public ArrayList<punto> preemptionRe(punto g) {
-		ArrayList<punto> p = new ArrayList<punto>(0);
-		p.add( new punto(g.getX(), g.getY()) );
+	public ArrayList<Punto> preemptionRe(Punto g) {
+		ArrayList<Punto> p = new ArrayList<Punto>(0);
+		p.add( new Punto(g.getX(), g.getY()) );
 		return p;
 	}
 	

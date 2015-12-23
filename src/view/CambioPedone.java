@@ -9,12 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.ScacchiController;
-import model.punto;
+import model.Punto;
 import rules.Torre;
 
 public class CambioPedone extends JDialog {
 
-	public CambioPedone(JFrame owner, ScacchiController c, punto g, int giocatore) {
+	public CambioPedone(JFrame owner, ScacchiController c, Punto g, int giocatore) {
 		super(owner, "scegli un pezzo", true);
 
 

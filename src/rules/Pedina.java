@@ -3,11 +3,11 @@ package rules;
 import java.util.ArrayList;
 
 import model.ScacchiModel;
-import model.punto;
+import model.Punto;
 
 public interface Pedina {
 	
-	public ArrayList<punto> preemption();
+	public ArrayList<Punto> preemption();
 
 	public int getGiocatore();
 
@@ -15,9 +15,9 @@ public interface Pedina {
 	
 	public boolean isRe(int g);
 	
-	public Boolean hasRePreemption( punto g);
+	public Boolean hasRePreemption( Punto g);
 	
-	public ArrayList<punto> preemptionRe( punto g);
+	public ArrayList<Punto> preemptionRe( Punto g);
 
 	public void setX(int x);
 	

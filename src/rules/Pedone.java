@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import view.ScacchiView;
 import model.ScacchiModel;
-import model.punto;
+import model.Punto;
 
 
 public class Pedone implements Pedina{
@@ -35,25 +35,25 @@ public class Pedone implements Pedina{
 		return g;
 	}
 	
-	public ArrayList<punto> preemption(){
-		ArrayList<punto> p= new ArrayList<punto>(0);
+	public ArrayList<Punto> preemption(){
+		ArrayList<Punto> p= new ArrayList<Punto>(0);
 		
 			
 			if( isValid(x+2, y) && g==0 && x==1 && m.get(x+2, y) == null){
-				p.add(new punto(x+2, y));
+				p.add(new Punto(x+2, y));
 			}
 			if( isValid(x-2, y) && g==1 && x==6 && m.get(x-2, y) == null){
-				p.add(new punto(x-2, y));
+				p.add(new Punto(x-2, y));
 			}
 			if( isValid( ( g==0) ? x+1 : x-1, y ) && m.get( ( g==0) ? x+1 : x-1, y)==null){
-				p.add(new punto( ( g==0) ? x+1 : x-1, y));
+				p.add(new Punto( ( g==0) ? x+1 : x-1, y));
 			}
 			
 				
 			if(isValid(x+1,y-1) && m.get( ( g==0) ? x+1 : x-1, y-1)!=null && m.get( ( g==0) ? x+1 : x-1, y-1).getGiocatore()!=g) 
-				p.add(new punto( ( g==0) ? x+1 : x-1 ,y-1));
+				p.add(new Punto( ( g==0) ? x+1 : x-1 ,y-1));
 			if(isValid(x+1,y+1) && m.get( ( g==0) ? x+1 : x-1, y+1)!=null && m.get( ( g==0) ? x+1 : x-1, y+1).getGiocatore()!=g) 
-				p.add(new punto( ( g==0) ? x+1 : x-1 ,y+1));
+				p.add(new Punto( ( g==0) ? x+1 : x-1 ,y+1));
 				
 		
 	
@@ -73,8 +73,8 @@ public class Pedone implements Pedina{
 		return false;
 	}
 	@Override
-	public Boolean hasRePreemption(punto g) {
-		ArrayList<punto> p= preemptionRe(new punto(0,0));
+	public Boolean hasRePreemption(Punto g) {
+		ArrayList<Punto> p= preemptionRe(new Punto(0,0));
 		if( g!=null ){
 		for(int i=0;i<p.size();i++)
 				if(p.get(i).getX()==g.getX() && p.get(i).getY()==g.getY())
@@ -85,14 +85,14 @@ public class Pedone implements Pedina{
 	
 	@Override
 	
-	public ArrayList<punto> preemptionRe(punto k) {
+	public ArrayList<Punto> preemptionRe(Punto k) {
 		
-		ArrayList<punto> p = new ArrayList<punto>(0);
+		ArrayList<Punto> p = new ArrayList<Punto>(0);
 		
 		if(isValid(x+1,y-1) ) 
-			p.add(new punto( ( g==0) ? x+1 : x-1 ,y-1));
+			p.add(new Punto( ( g==0) ? x+1 : x-1 ,y-1));
 		if(isValid(x+1,y+1) ) 
-			p.add(new punto( ( g==0) ? x+1 : x-1 ,y+1));
+			p.add(new Punto( ( g==0) ? x+1 : x-1 ,y+1));
 
 		return p;
 		

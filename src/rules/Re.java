@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 import model.ScacchiModel;
-import model.punto;
+import model.Punto;
 import view.ScacchiView;
 
 
@@ -36,12 +36,12 @@ public class Re implements Pedina{
 
 
 	
-	public  ArrayList<punto> preemption(){
+	public  ArrayList<Punto> preemption(){
 		return a();
 	}
 	
-	public  ArrayList<punto> a(){
-		ArrayList<punto> p= new ArrayList<punto>(0);
+	public  ArrayList<Punto> a(){
+		ArrayList<Punto> p= new ArrayList<Punto>(0);
 		int x1=x-1;
 		int y1=y-1;
 		
@@ -54,7 +54,7 @@ public class Re implements Pedina{
 					if(  (m.get(x1+a,y1+i)==null || m.get(x1+a,y1+i).getGiocatore()!=g) )
 						
 						
-							p.add(new punto(x1+a,y1+i));
+							p.add(new Punto(x1+a,y1+i));
 	
 		return p;
 				
@@ -62,8 +62,8 @@ public class Re implements Pedina{
 	}
 	
 	
-	public Boolean hasRePreemption(punto g){
-		ArrayList<punto> p = preemption();
+	public Boolean hasRePreemption(Punto g){
+		ArrayList<Punto> p = preemption();
 		for(int i=0;i<p.size();i++)
 			if(p.get(i).getX()==g.getX() && p.get(i).getY()==g.getY())
 				return true;
@@ -91,10 +91,10 @@ public class Re implements Pedina{
 			return false;
 	}
 	@Override
-	public ArrayList<punto> preemptionRe(punto g) {
+	public ArrayList<Punto> preemptionRe(Punto g) {
 		
-		ArrayList<punto> p = new ArrayList<punto>(0);
-		p.add( new punto(g.getX(), g.getY()) );
+		ArrayList<Punto> p = new ArrayList<Punto>(0);
+		p.add( new Punto(g.getX(), g.getY()) );
 		return p;
 		
 	}
